@@ -7,14 +7,16 @@ class Store:
     self.name = name
     self.items = []
     self.path = os.path.join(os.getcwd(), 'data', f"{name}.json")
+    self.datadir = os.path.join(os.getcwd(), 'data')
     
     self.init_file()
     
     
-  def init_file(self: Self) -> None:
-    file_path = os.path.join(os.getcwd(), 'data', f"{self.name}.json")
-    
-    if not os.path.exists(file_path):
+  def init_file(self: Self) -> None:    
+    if not os.path.exists(self.datadir):
+      os.mkdir(self.datadir)
+        
+    if not os.path.exists(self.path):
       self.save_file()
     else:
       self.read_file()

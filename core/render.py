@@ -1,13 +1,14 @@
 import os
 from tabulate import tabulate
+from typing import Self
 from beaupy import prompt, select_multiple, confirm
 
 class Render:
-  def __init__(self, store):
+  def __init__(self, store) -> None:
     self._store = store
     
   
-  def show_items(self):
+  def show_items(self: Self) -> None:
     
     if len(self._store.items) > 0:
       filtered = [{"completed": 'X', "title": self.strike_text(item["title"])} if item["completed"] == 'true' else {"completed": '', "title": item["title"]} for item in  self._store]
@@ -18,7 +19,7 @@ class Render:
       print("You have no list items, create a new one pressing [n]")
     
   
-  def mark_completed(self):
+  def mark_completed(self: Self) -> None:
     self.clear()
     
     items = [item for item in self._store if item["completed"] == 'false']    
@@ -30,7 +31,7 @@ class Render:
     self.show_items()
     
 
-  def mark_uncompleted(self):
+  def mark_uncompleted(self: Self) -> None:
     self.clear()
     
     items = [item for item in self._store if item["completed"] == 'true']
@@ -43,7 +44,7 @@ class Render:
     self.show_items()
     
     
-  def delete_items(self):
+  def delete_items(self: Self) -> None:
     self.clear()
     
     items = [item for item in self._store]
@@ -59,7 +60,7 @@ class Render:
     self.show_items()
     
     
-  def new_item(self):
+  def new_item(self: Self) -> None:
     self.clear()
     
     title = prompt("New item title:")
@@ -69,10 +70,10 @@ class Render:
 
   
   @staticmethod
-  def clear():
+  def clear() -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
     
     
   @staticmethod
-  def strike_text(text):
+  def strike_text(text) -> None:
     return ''.join([u'\u0336{}'.format(c) for c in text])

@@ -1,7 +1,7 @@
 import time
 
 class Navigator:
-  def __init__(self, render):
+  def __init__(self, render) -> None:
     self._render = render
     
     while True:
@@ -28,7 +28,7 @@ class Navigator:
         self._render.clear()
         return
   
-  def do_navigation(self, cmd):
+  def do_navigation(self, cmd: str) -> None:
     print(cmd)
     match cmd:
       case 'n':
@@ -44,7 +44,7 @@ class Navigator:
       case _:
         raise ValueError
   
-  def print_nav(self):
+  def print_nav(self) -> None:
     print("\n\n [n] New | [d] Delete  \n [c] Completed | [x] Uncompleted \n [w] Exit", end="\n\n")
 
         
